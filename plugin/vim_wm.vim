@@ -87,10 +87,9 @@ if has('python')
 		nnoremap <F5> :call Vim_Size_Select()<CR>
 		nnoremap <F6> :call Vim_Top_Select()<CR>
 	endif
-	if !exists("g:vim_wm_big")
+	if !exists("g:vim_wm_big") &&
+	 \ !exists("g:vim_wm_large")
 		let g:vim_wm_big = [1024 , 768]
-	endif
-	if !exists("g:vim_wm_large")
-		let g:vim_wm_large = [1280, 960]
+		let g:vim_wm_large = [1280 , 960]
 	endif
 endif
