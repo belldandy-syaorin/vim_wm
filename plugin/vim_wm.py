@@ -1,7 +1,7 @@
 from win32api import GetCursorPos
 from win32api import GetSystemMetrics
 # from PyQt4 import QtGui
-import sys , vim , win32gui
+import string , sys , vim , win32gui
 
 """
 app = QtGui.QApplication([])
@@ -22,8 +22,8 @@ smart_x = [resolution_w / 3, resolution_w / 3 * 2, resolution_w, resolution_w - 
 smart_y = [resolution_h / 3, resolution_h / 3 * 2, resolution_h, resolution_h - vim_rect_h]
 wincenter = GetCursorPos()
 # wincenter = [QtGui.QCursor().pos().x() , QtGui.QCursor().pos().y()]
-big = [1024, 768]
-large = [1280, 960]
+big = [string.atoi(vim.eval("g:vim_wm_big[0]")) , string.atoi(vim.eval("g:vim_wm_big[1]"))]
+large = [string.atoi(vim.eval("g:vim_wm_large[0]")) , string.atoi(vim.eval("g:vim_wm_large[1]"))]
 
 def vim_pos(x,y,z):
     win32gui.SetWindowPos(hwnd, 0, x, y, 0, 0, 0x0001 + 0x0004)
