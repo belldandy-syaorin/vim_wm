@@ -81,7 +81,7 @@ if has('python')
 	endfunction
 	function! Vim_Smart_Size_Select()
 		if !exists("s:vim_smart_size_select")
-			let s:vim_smart_size_select = 0
+			let s:vim_smart_size_select = 1
 		endif
 		if s:vim_smart_size_select == 0
 			let s:vim_smart_size_select = 1
@@ -107,6 +107,6 @@ if has('python')
 	 \ !exists("g:enable_vim_wm_smartsize")
 		let g:vim_wm_big = [1024 , 768]
 		let g:vim_wm_large = [1280 , 960]
-		let g:enable_vim_wm_smartsize = 0
+		let g:enable_vim_wm_smartsize = 1
 	endif
 endif
