@@ -31,20 +31,20 @@ else:
 
 def vim_pos(x,y,z):
     win32gui.SetWindowPos(hwnd, 0, x, y, 0, 0, 0x0001 + 0x0004)
-    vim.command("echo 'Vim_Pos ='"+str(z))
+    vim.command("echo 'Position ='"+str(z))
 
 def vim_size(x,y):
     a = (resolution_w - x) / 2
     b = (resolution_h - y) / 2
     win32gui.SetWindowPos(hwnd, 0, a, b, x, y, 0x0004)
-    vim.command("echo 'Vim_Size ='"+str(x)+" "+str(y))
+    vim.command("echo 'Size ='"+str(x)+" "+str(y))
 
 def vim_top(z):
     win32gui.SetWindowPos(hwnd, z, 0, 0, 0, 0, 0x0001 + 0x0002)
     if z == -1:
-        vim.command("echo 'Vim_Top = Enable'")
+        vim.command("echo 'Top = Enable'")
     elif z == -2:
-        vim.command("echo 'Vim_Top = Disable'")
+        vim.command("echo 'Top = Disable'")
 
 class vim_move:
     def position1(self):
@@ -113,7 +113,7 @@ def mode_default():
     vim.command("set columns=80")
     vim.command("set lines=25")
     vim.command("winpos 0 0")
-    vim.command("echo 'Vim_Pos+Size = Default'")
+    vim.command("echo 'Position+Size = Default'")
 
 def mode_top():
     vim_top(-1)

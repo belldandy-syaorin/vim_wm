@@ -86,11 +86,11 @@ if has('python')
 		if s:vim_smart_size_select == 0
 			let s:vim_smart_size_select = 1
 			let g:enable_vim_wm_smartsize = 1
-			echo 'Vim_Smartsize = Enable'
+			echo 'Smartsize = Enable'
 		elseif s:vim_smart_size_select == 1
 			let s:vim_smart_size_select = 0
 			let g:enable_vim_wm_smartsize = 0
-			echo 'Vim_Smartsize = Disable'
+			echo 'Smartsize = Disable'
 		endif
 	endfunction
 	if exists("g:enable_vim_wm_defaulthotkey") &&
