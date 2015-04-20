@@ -1,8 +1,8 @@
 if has('python')
 	python import sys
-	let s:vim_pyfilepath = expand('<sfile>:r') . '.py'
+	let s:vim_wm_pyfilepath = expand('<sfile>:r') . '.py'
 	function! Vim_Py()
-		execute 'pyfile ' s:vim_pyfilepath
+		execute 'pyfile ' s:vim_wm_pyfilepath
 	endfunction
 	function! Vim_Pos(mode)
 		if a:mode == 0
