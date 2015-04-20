@@ -79,17 +79,34 @@ if has('python')
 		endif
 		call Vim_Py()
 	endfunction
+	function! Vim_Smart_Size_Select()
+		if !exists("s:vim_smart_size_select")
+			let s:vim_smart_size_select = 0
+		endif
+		if s:vim_smart_size_select == 0
+			let s:vim_smart_size_select = 1
+			let g:enable_vim_wm_smartsize = 1
+			echo 'Vim_Smartsize = Enable'
+		elseif s:vim_smart_size_select == 1
+			let s:vim_smart_size_select = 0
+			let g:enable_vim_wm_smartsize = 0
+			echo 'Vim_Smartsize = Disable'
+		endif
+	endfunction
 	if exists("g:enable_vim_wm_defaulthotkey") &&
 	 \ g:enable_vim_wm_defaulthotkey == 1
 		nnoremap <F3> :call Vim_Pos(0)<CR>
 		nnoremap <F4> :call Vim_Pos(1)<CR>
 		nnoremap <S-F4> :call Vim_Move()
 		nnoremap <F5> :call Vim_Size_Select()<CR>
+		nnoremap <S-F5> :call Vim_Smart_Size_Select()<CR>
 		nnoremap <F6> :call Vim_Top_Select()<CR>
 	endif
 	if !exists("g:vim_wm_big") &&
-	 \ !exists("g:vim_wm_large")
+	 \ !exists("g:vim_wm_large") &&
+	 \ !exists("g:enable_vim_wm_smartsize")
 		let g:vim_wm_big = [1024 , 768]
 		let g:vim_wm_large = [1280 , 960]
+		let g:enable_vim_wm_smartsize = 0
 	endif
 endif

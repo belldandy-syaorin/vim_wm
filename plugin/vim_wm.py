@@ -22,8 +22,12 @@ smart_x = [resolution_w / 3, resolution_w / 3 * 2, resolution_w, resolution_w - 
 smart_y = [resolution_h / 3, resolution_h / 3 * 2, resolution_h, resolution_h - vim_rect_h]
 wincenter = GetCursorPos()
 # wincenter = [QtGui.QCursor().pos().x() , QtGui.QCursor().pos().y()]
-big = [string.atoi(vim.eval("g:vim_wm_big[0]")) , string.atoi(vim.eval("g:vim_wm_big[1]"))]
-large = [string.atoi(vim.eval("g:vim_wm_large[0]")) , string.atoi(vim.eval("g:vim_wm_large[1]"))]
+if string.atoi(vim.eval("g:enable_vim_wm_smartsize")) == 1:
+    big = [resolution_w / 3 * 2, resolution_h / 3 * 2]
+    large = [resolution_w / 5 * 4, resolution_h / 5 * 4]
+else:
+    big = [string.atoi(vim.eval("g:vim_wm_big[0]")) , string.atoi(vim.eval("g:vim_wm_big[1]"))]
+    large = [string.atoi(vim.eval("g:vim_wm_large[0]")) , string.atoi(vim.eval("g:vim_wm_large[1]"))]
 
 def vim_pos(x,y,z):
     win32gui.SetWindowPos(hwnd, 0, x, y, 0, 0, 0x0001 + 0x0004)
