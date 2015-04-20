@@ -37,7 +37,7 @@ def vim_size(x,y):
     a = (resolution_w - x) / 2
     b = (resolution_h - y) / 2
     win32gui.SetWindowPos(hwnd, 0, a, b, x, y, 0x0004)
-    vim.command("echo 'Size ='"+str(x)+" "+str(y))
+    vim.command("echo 'Position = 5 ; Size ='"+str(x)+" "+str(y))
 
 def vim_top(z):
     win32gui.SetWindowPos(hwnd, z, 0, 0, 0, 0, 0x0001 + 0x0002)
