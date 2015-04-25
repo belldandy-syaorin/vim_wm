@@ -18,13 +18,13 @@ vim_rect_w = vim_rect[2] - vim_rect_x
 vim_rect_h = vim_rect[3] - vim_rect_y
 center_x = (resolution_w - vim_rect_w) / 2
 center_y = (resolution_h - vim_rect_h) / 2
-smart_x = [resolution_w / 3, resolution_w / 3 * 2, resolution_w, resolution_w - vim_rect_w]
-smart_y = [resolution_h / 3, resolution_h / 3 * 2, resolution_h, resolution_h - vim_rect_h]
+smart_x = [resolution_w / 3 , resolution_w / 3 * 2 , resolution_w , resolution_w - vim_rect_w]
+smart_y = [resolution_h / 3 , resolution_h / 3 * 2 , resolution_h , resolution_h - vim_rect_h]
 wincenter = GetCursorPos()
 # wincenter = [QtGui.QCursor().pos().x() , QtGui.QCursor().pos().y()]
 if string.atoi(vim.eval("g:enable_vim_wm_smartsize")) == 1:
-    big = [resolution_w / 3 * 2, resolution_h / 3 * 2]
-    large = [resolution_w / 5 * 4, resolution_h / 5 * 4]
+    big = [resolution_w / 3 * 2 , resolution_h / 3 * 2]
+    large = [resolution_w / 5 * 4 , resolution_h / 5 * 4]
 else:
     big = [string.atoi(vim.eval("g:vim_wm_big[0]")) , string.atoi(vim.eval("g:vim_wm_big[1]"))]
     large = [string.atoi(vim.eval("g:vim_wm_large[0]")) , string.atoi(vim.eval("g:vim_wm_large[1]"))]
@@ -104,10 +104,10 @@ def mode_smart():
             vm.position3()
 
 def mode_big():
-    vim_size(big[0],big[1])
+    vim_size(big[0] , big[1])
 
 def mode_large():
-    vim_size(large[0],large[1])
+    vim_size(large[0] , large[1])
 
 def mode_default():
     vim.command("set columns=80")
