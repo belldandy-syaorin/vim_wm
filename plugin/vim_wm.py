@@ -30,8 +30,17 @@ else:
     large = [string.atoi(vim.eval("g:vim_wm_large[0]")) , string.atoi(vim.eval("g:vim_wm_large[1]"))]
 
 def vim_pos(x,y,z):
-    win32gui.SetWindowPos(hwnd, 0, x, y, 0, 0, 0x0001 + 0x0004)
-    vim.command("echo 'Position ='"+str(z))
+    if string.atoi(vim.eval("g:enable_vim_wm_taskbar")) == 1:
+        if z == 1 or z == 2 or z ==3:
+            i = y - 30
+            win32gui.SetWindowPos(hwnd, 0, x, i, 0, 0, 0x0001 + 0x0004)
+            vim.command("echo 'Position ='"+str(z))
+        else:
+            win32gui.SetWindowPos(hwnd, 0, x, y, 0, 0, 0x0001 + 0x0004)
+            vim.command("echo 'Position ='"+str(z))
+    else:
+        win32gui.SetWindowPos(hwnd, 0, x, y, 0, 0, 0x0001 + 0x0004)
+        vim.command("echo 'Position ='"+str(z))
 
 def vim_size(x,y):
     a = (resolution_w - x) / 2
