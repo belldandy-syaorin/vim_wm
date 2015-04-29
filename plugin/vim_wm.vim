@@ -108,10 +108,10 @@ if has('python')
 	if !exists("g:vim_wm_large")
 		let g:vim_wm_large = [1280 , 960]
 	endif
-	if !exists("g:enable_vim_wm_taskbar")
-		let g:enable_vim_wm_taskbar = 1
-	endif
 	if !exists("g:enable_vim_wm_smartsize")
 		let g:enable_vim_wm_smartsize = 1
+	endif
+	if !exists("g:enable_vim_wm_taskbar")
+		let g:enable_vim_wm_taskbar = 1
 	endif
 endif
