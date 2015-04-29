@@ -102,16 +102,16 @@ if has('python')
 		nnoremap <S-F5> :call Vim_Smart_Size_Select()<CR>
 		nnoremap <F6> :call Vim_Top_Select()<CR>
 	endif
-	if !exists("g:vim_wm_big")
-		let g:vim_wm_big = [1024 , 768]
-	endif
-	if !exists("g:vim_wm_large")
-		let g:vim_wm_large = [1280 , 960]
-	endif
 	if !exists("g:enable_vim_wm_smartsize")
 		let g:enable_vim_wm_smartsize = 1
 	endif
 	if !exists("g:enable_vim_wm_taskbar")
 		let g:enable_vim_wm_taskbar = 1
+	endif
+	if !exists("g:vim_wm_big")
+		let g:vim_wm_big = [1024 , 768]
+	endif
+	if !exists("g:vim_wm_large")
+		let g:vim_wm_large = [1280 , 960]
 	endif
 endif
