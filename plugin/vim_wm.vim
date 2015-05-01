@@ -97,7 +97,7 @@ if has('python')
 	 \ g:enable_vim_wm_defaulthotkey == 1
 		nnoremap <F3> :call Vim_Pos(0)<CR>
 		nnoremap <F4> :call Vim_Pos(1)<CR>
-		nnoremap <S-F4> :call Vim_Move()
+		nnoremap <S-F4> :call Vim_Move()<Left>
 		nnoremap <F5> :call Vim_Size_Select()<CR>
 		nnoremap <S-F5> :call Vim_Smart_Size_Select()<CR>
 		nnoremap <F6> :call Vim_Top_Select()<CR>
