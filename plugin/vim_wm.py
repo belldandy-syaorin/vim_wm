@@ -1,13 +1,7 @@
 from win32api import GetCursorPos
 from win32api import GetSystemMetrics
-# from PyQt4 import QtGui
 import string , sys , vim , win32gui
 
-"""
-app = QtGui.QApplication([])
-resolution_w = QtGui.QDesktopWidget().screenGeometry().width()
-resolution_h = QtGui.QDesktopWidget().screenGeometry().height()
-"""
 resolution_w = GetSystemMetrics(0)
 resolution_h = GetSystemMetrics(1)
 hwnd = win32gui.GetActiveWindow()
@@ -21,7 +15,6 @@ center_y = (resolution_h - vim_rect_h) / 2
 smart_x = [resolution_w / 3 , resolution_w / 3 * 2 , resolution_w , resolution_w - vim_rect_w]
 smart_y = [resolution_h / 3 , resolution_h / 3 * 2 , resolution_h , resolution_h - vim_rect_h]
 wincenter = GetCursorPos()
-# wincenter = [QtGui.QCursor().pos().x() , QtGui.QCursor().pos().y()]
 if string.atoi(vim.eval("g:enable_vim_wm_smartsize")) == 1:
     big = [resolution_w / 3 * 2 , resolution_h / 3 * 2]
     large = [resolution_w / 5 * 4 , resolution_h / 5 * 4]
