@@ -41,13 +41,6 @@ def vim_size(x,y):
     win32gui.SetWindowPos(hwnd, 0, a, b, x, y, 0x0004)
     vim.command("echo 'Position = 5 ; Size ='"+str(x)+" "+str(y))
 
-def vim_top(z):
-    win32gui.SetWindowPos(hwnd, z, 0, 0, 0, 0, 0x0001 + 0x0002)
-    if z == -1:
-        vim.command("echo 'Top = Enable'")
-    elif z == -2:
-        vim.command("echo 'Top = Disable'")
-
 class vim_move:
     def position1(self):
         vim_pos(0,smart_y[3],1)
@@ -117,20 +110,12 @@ def mode_default():
     vim.command("winpos 0 0")
     vim.command("echo 'Position+Size = Default'")
 
-def mode_top():
-    vim_top(-1)
-
-def mode_untop():
-    vim_top(-2)
-
 vm = vim_move()
 selectmode = {'normal': mode_normal,
               'smart': mode_smart,
               'big': mode_big,
               'large': mode_large,
               'default': mode_default,
-              'top': mode_top,
-              'untop': mode_untop,
               'position1': vm.position1,
               'position2': vm.position2,
               'position3': vm.position3,
