@@ -37,26 +37,6 @@ if has('python')
 			let s:vim_size_select = 0
 		endif
 	endfunction
-	function! Vim_Top(mode)
-		if a:mode == 0
-			python sys.argv = ["untop"]
-		elseif a:mode == 1
-			python sys.argv = ["top"]
-		endif
-		call Vim_Py()
-	endfunction
-	function! Vim_Top_Select()
-		if !exists("s:vim_top_select")
-			let s:vim_top_select = 1
-		endif
-		if s:vim_top_select == 0
-			call Vim_Top(0)
-			let s:vim_top_select = 1
-		elseif s:vim_top_select == 1
-			call Vim_Top(1)
-			let s:vim_top_select = 0
-		endif
-	endfunction
 	function! Vim_Move(mode)
 		if a:mode == 1
 			python sys.argv = ["position1"]
@@ -99,8 +79,7 @@ if has('python')
 		nnoremap <F4> :call Vim_Pos(1)<CR>
 		nnoremap <S-F4> :call Vim_Move()<Left>
 		nnoremap <F5> :call Vim_Size_Select()<CR>
-		nnoremap <S-F5> :call Vim_Smart_Size_Select()<CR>
-		nnoremap <F6> :call Vim_Top_Select()<CR>
+		nnoremap <F6> :call Vim_Smart_Size_Select()<CR>
 	endif
 	if !exists("g:enable_vim_wm_smartsize")
 		let g:enable_vim_wm_smartsize = 1
