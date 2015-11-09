@@ -3,17 +3,20 @@ from win32api import GetSystemMetrics
 import string , sys , vim , win32gui
 
 resolution_w = GetSystemMetrics(0)
-resolution_h = GetSystemMetrics(1)
+if string.atoi(vim.eval("g:enable_vim_wm_taskbar")) == 1:
+    resolution_h = GetSystemMetrics(1) - 30
+else:
+    resolution_h = GetSystemMetrics(1)
 hwnd = win32gui.GetActiveWindow()
-vim_rect = win32gui.GetWindowRect(hwnd)
-vim_rect_x = vim_rect[0]
-vim_rect_y = vim_rect[1]
-vim_rect_w = vim_rect[2] - vim_rect_x
-vim_rect_h = vim_rect[3] - vim_rect_y
-center_x = (resolution_w - vim_rect_w) / 2
-center_y = (resolution_h - vim_rect_h) / 2
-smart_x = [resolution_w / 3 , resolution_w / 3 * 2 , resolution_w , resolution_w - vim_rect_w]
-smart_y = [resolution_h / 3 , resolution_h / 3 * 2 , resolution_h , resolution_h - vim_rect_h]
+win_rect = win32gui.GetWindowRect(hwnd)
+win_rect_x = win_rect[0]
+win_rect_y = win_rect[1]
+win_rect_w = win_rect[2] - win_rect_x
+win_rect_h = win_rect[3] - win_rect_y
+center_x = (resolution_w - win_rect_w) / 2
+center_y = (resolution_h - win_rect_h) / 2
+smart_x = [resolution_w / 3 , resolution_w / 3 * 2 , resolution_w , resolution_w - win_rect_w]
+smart_y = [resolution_h / 3 , resolution_h / 3 * 2 , resolution_h , resolution_h - win_rect_h]
 wincenter = GetCursorPos()
 if string.atoi(vim.eval("g:enable_vim_wm_smartsize")) == 1:
     big = [resolution_w / 3 * 2 , resolution_h / 3 * 2]
@@ -22,108 +25,75 @@ else:
     big = [string.atoi(vim.eval("g:vim_wm_big[0]")) , string.atoi(vim.eval("g:vim_wm_big[1]"))]
     large = [string.atoi(vim.eval("g:vim_wm_large[0]")) , string.atoi(vim.eval("g:vim_wm_large[1]"))]
 
-def vim_pos(x,y,z):
-    if string.atoi(vim.eval("g:enable_vim_wm_taskbar")) == 1:
-        if z == 1 or z == 2 or z ==3:
-            i = y - 30
-            win32gui.SetWindowPos(hwnd, 0, x, i, 0, 0, 0x0001 + 0x0004)
-            vim.command("echo 'Position ='"+str(z))
-        else:
-            win32gui.SetWindowPos(hwnd, 0, x, y, 0, 0, 0x0001 + 0x0004)
-            vim.command("echo 'Position ='"+str(z))
-    else:
-        win32gui.SetWindowPos(hwnd, 0, x, y, 0, 0, 0x0001 + 0x0004)
-        vim.command("echo 'Position ='"+str(z))
+def win_pos(x,y,z):
+    win32gui.SetWindowPos(hwnd, 0, x, y, 0, 0, 0x0001 + 0x0004)
+    vim.command("echo 'Position ='"+str(z))
 
-def vim_size(x,y):
+def win_size(x,y):
     a = (resolution_w - x) / 2
     b = (resolution_h - y) / 2
     win32gui.SetWindowPos(hwnd, 0, a, b, x, y, 0x0004)
     vim.command("echo 'Position = 5 ; Size ='"+str(x)+" "+str(y))
 
-class vim_move:
+class win_move:
     def position1(self):
-        vim_pos(0,smart_y[3],1)
+        win_pos(0,smart_y[3],1)
     def position4(self):
-        vim_pos(0,center_y,4)
+        win_pos(0,center_y,4)
     def position7(self):
-        vim_pos(0,0,7)
+        win_pos(0,0,7)
     def position2(self):
-        vim_pos(center_x,smart_y[3],2)
+        win_pos(center_x,smart_y[3],2)
     def position5(self):
-        vim_pos(center_x,center_y,5)
+        win_pos(center_x,center_y,5)
     def position8(self):
-        vim_pos(center_x,0,8)
+        win_pos(center_x,0,8)
     def position3(self):
-        vim_pos(smart_x[3],smart_y[3],3)
+        win_pos(smart_x[3],smart_y[3],3)
     def position6(self):
-        vim_pos(smart_x[3],center_y,6)
+        win_pos(smart_x[3],center_y,6)
     def position9(self):
-        vim_pos(smart_x[3],0,9)
+        win_pos(smart_x[3],0,9)
 
-def mode_normal():
-    if vim_rect_x != center_x and vim_rect_y != center_y:
-        vm.position5()
-    elif vim_rect_y == center_y:
-        if vim_rect_x == center_x:
-            vm.position4()
-        elif vim_rect_x == 0:
-            vm.position6()
-        elif vim_rect_x == smart_x[3]:
-            vm.position5()
-    elif vim_rect_x == center_x:
-        if vim_rect_y == 0 or vim_rect_y == smart_y[3]:
-            vm.position5()
-
-def mode_smart():
+def smartposition():
     if wincenter[0] >= 0 and wincenter[0] <= smart_x[0]:
         if wincenter[1] <= smart_y[0]:
-            vm.position7()
+            wm.position7()
         elif wincenter[1] >= smart_y[0] and wincenter[1] <= smart_y[1]:
-            vm.position4()
+            wm.position4()
         elif wincenter[1] >= smart_y[1] and wincenter[1] <= smart_y[2]:
-            vm.position1()
+            wm.position1()
     elif wincenter[0] >= smart_x[0] and wincenter[0] <= smart_x[1]:
         if wincenter[1] <= smart_y[0]:
-            vm.position8()
+            wm.position8()
         elif wincenter[1] >= smart_y[0] and wincenter[1] <= smart_y[1]:
-            vm.position5()
+            wm.position5()
         elif wincenter[1] >= smart_y[1] and wincenter[1] <= smart_y[2]:
-            vm.position2()
+            wm.position2()
     elif wincenter[0] >= smart_x[1] and wincenter[0] <= smart_x[2]:
         if wincenter[1] <= smart_y[0]:
-            vm.position9()
+            wm.position9()
         elif wincenter[1] >= smart_y[0] and wincenter[1] <= smart_y[1]:
-            vm.position6()
+            wm.position6()
         elif wincenter[1] >= smart_y[1] and wincenter[1] <= smart_y[2]:
-            vm.position3()
+            wm.position3()
 
-def mode_big():
-    vim_size(big[0] , big[1])
-
-def mode_large():
-    vim_size(large[0] , large[1])
-
-def mode_default():
+def size_default():
     vim.command("set columns=80")
     vim.command("set lines=25")
     vim.command("winpos 0 0")
     vim.command("echo 'Position+Size = Default'")
 
-vm = vim_move()
-selectmode = {'normal': mode_normal,
-              'smart': mode_smart,
-              'big': mode_big,
-              'large': mode_large,
-              'default': mode_default,
-              'position1': vm.position1,
-              'position2': vm.position2,
-              'position3': vm.position3,
-              'position4': vm.position4,
-              'position5': vm.position5,
-              'position6': vm.position6,
-              'position7': vm.position7,
-              'position8': vm.position8,
-              'position9': vm.position9,
+def size_big():
+    win_size(big[0] , big[1])
+
+def size_large():
+    win_size(large[0] , large[1])
+
+wm = win_move()
+selectmode = {'smart': smartposition,
+              'default': size_default,
+              'big': size_big,
+              'large': size_large,
 }
 selectmode[sys.argv[0]]()
