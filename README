@@ -1,0 +1,21 @@
+wmplus for vim . (windows only)
+wmplus vim 版本。 (只適用 windows)
+feature like wmplus ,
+but default hot key is different ,
+and it only had two size and vim default size to toggle .
+功能上類似 wmplus ，
+但預設熱鍵不同，
+而且它只有兩種大小和 vim 預設大小可以切換。
+default hot key :
+預設熱鍵：
+	f5 : same as wmplus's feature 1 .
+	f5 : 和 wmplus 的功能 1 相同。
+	shift - f5 : same as wmplus's misc .
+	shift - f5 : 和 wmplus 的 misc 相同。
+	f6 : same as wmplus's feature 2 & 3
+	f5 : 和 wmplus 的功能 2 和 3 相同。
+	shift - f6 : toggle 2 & 3 .
+	shift - f6 : 切換功能 2 或 3 。
+for details , see :
+詳細說明請參考：
+	https://github.com/belldandy-syaorin/script/blob/master/wmplus/README
